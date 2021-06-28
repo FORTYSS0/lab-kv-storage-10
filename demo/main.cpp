@@ -31,10 +31,16 @@ int main(int argc, const char *argv[])
             const_cast<int &>(vm["thread_count"].as<int>()),
             default_output_path);
       else if (!vm.count("thread_count") && vm.count("output"))
+        if(vm["output"].as<std::string>()!="")
         Storage::start(
             argv[count_options * 2 + 1],
             default_num_threads,
             vm["output"].as<std::string>());
+        else
+          Storage::start(
+              argv[count_options * 2 + 1],
+              default_num_threads,
+              default_output_path);
       else
         Storage::start(
             argv[count_options * 2 + 1],

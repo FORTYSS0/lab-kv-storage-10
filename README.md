@@ -66,7 +66,7 @@ $ dbcs --help
 
 Usage:
 
-  dbcs [options] <path/to/input/storage.db>
+  dbcs [options] <path/to/input/storagee.db>
 
 Options:
 
@@ -76,8 +76,8 @@ Options:
   --thread-count <number>       = 
                                 = default: count of logical core
 
-  --output <path>               = <path/to/output/storage.db>
-                                = default: <path/to/input/dbcs-storage.db>
+  --output <path>               = <path/to/output/storagee.db>
+                                = default: <path/to/input/dbcs-storagee.db>
 
 # вычисление контрольной суммы
 $ dbcs /dir/file.db

@@ -21,13 +21,14 @@
 #include "Reader.hpp"
 #include "Writer.hpp"
 
-const char note[] = "NOTE:\n  If the database is created ignore this message, "
-              "but if the database is not created, use:\n"
-              "  ./create <path_to_directory>\n\n";
-const char usage[] = "Usage:\n  ./demo [options] <source_path>\n\n";
+const char note[] =
+    "NOTE:\n  If the database is created ignore this message\n\n";
+              //"but if the database is not created, use:\n"
+              //"  ./create <path_to_directory>\n\n";
+const char usage[] = "Usage:\n  ./dbcs [options] <source_path>\n\n";
 const char error_mes[] = "**********BAD SYNTAX**********\n"
                      "Look to --help or -h";
-const char default_output_path[] = "output_db";
+const char default_output_path[] = "path/to/output/storagee.db";
 const int default_num_threads =
     static_cast<int>(std::thread::hardware_concurrency());
 const boost::log::trivial::severity_level default_sev_lvl =
