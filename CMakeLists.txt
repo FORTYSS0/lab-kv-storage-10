@@ -44,14 +44,14 @@ find_package(GTest CONFIG REQUIRED)
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
         ${CMAKE_CURRENT_SOURCE_DIR}/sources/storage.cpp
-        sources/Creator.cpp sources/Reader.cpp include/Reader.hpp sources/Writer.cpp include/Writer.hpp include/Field.hpp)
+        sources/Reader.cpp include/Reader.hpp sources/Writer.cpp include/Writer.hpp include/Field.hpp)
 
 add_executable(demo
   ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
 )
 
-add_executable(create
-        ${CMAKE_CURRENT_SOURCE_DIR}/demo/create.cpp)
+#add_executable(create
+#        ${CMAKE_CURRENT_SOURCE_DIR}/demo/create.cpp)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
@@ -68,7 +68,7 @@ target_link_libraries(${PROJECT_NAME} ${Boost_FILESYSTEM_LIBRARY})
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} RocksDB::rocksdb)
 target_link_libraries(demo ${PROJECT_NAME})
-target_link_libraries(create ${PROJECT_NAME})
+#target_link_libraries(create ${PROJECT_NAME})
 
 if(BUILD_TESTS)
   add_executable(tests

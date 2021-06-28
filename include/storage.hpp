@@ -28,7 +28,7 @@ const char note[] =
 const char usage[] = "Usage:\n  ./dbcs [options] <source_path>\n\n";
 const char error_mes[] = "**********BAD SYNTAX**********\n"
                      "Look to --help or -h";
-const char default_output_path[] = "path/to/output/storagee.db";
+const char default_output_path[] = "path/to/output/storage.db";
 const int default_num_threads =
     static_cast<int>(std::thread::hardware_concurrency());
 const boost::log::trivial::severity_level default_sev_lvl =
