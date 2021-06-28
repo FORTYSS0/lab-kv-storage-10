@@ -33,27 +33,42 @@ find_package(gflags CONFIG REQUIRED)
 hunter_add_package(rocksdb)
 find_package(RocksDB CONFIG REQUIRED)
 
-hunter_add_package(Boost COMPONENTS program_options)
-find_package(Boost CONFIG REQUIRED program_options)
+hunter_add_package(Boost COMPONENTS program_options log thread system filesystem)
+find_package(Boost CONFIG REQUIRED program_options log log_setup thread system filesystem)
+
+find_package(Threads)
 
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
-)
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/storage.cpp
+        sources/Creator.cpp sources/Reader.cpp include/Reader.hpp sources/Writer.cpp include/Writer.hpp include/Field.hpp)
 
 add_executable(demo
   ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
 )
 
+add_executable(create
+        ${CMAKE_CURRENT_SOURCE_DIR}/demo/create.cpp)
+
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third-party/PicoSHA2>"
   "$<INSTALL_INTERFACE:include>"
 )
 
+target_link_libraries(${PROJECT_NAME} Boost::program_options)
+target_link_libraries(${PROJECT_NAME} ${Boost_LOG_SETUP_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_LOG_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_THREAD_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_FILESYSTEM_LIBRARY})
+target_link_libraries(${PROJECT_NAME} pthread)
+target_link_libraries(${PROJECT_NAME} RocksDB::rocksdb)
 target_link_libraries(demo ${PROJECT_NAME})
+target_link_libraries(create ${PROJECT_NAME})
 
 if(BUILD_TESTS)
   add_executable(tests
