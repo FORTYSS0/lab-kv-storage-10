@@ -5,7 +5,8 @@ Reader::Reader(const int& num_workers) : readers(num_workers) {}
 void Reader::read(const Field& field_) {
   readers.enqueue([&](const Field& field){
     ++temp_nums_in_column;
-    db_out->Put(rocksdb::WriteOptions(), handles_cf_out.front(),
+    db_out->Put(rocksdb::WriteOptions(),
+                handles_cf_out.front(),
                 field.key, field.value);
     if (nums_in_columns.front() == temp_nums_in_column){
       handles_cf_out.erase(handles_cf_out.begin());

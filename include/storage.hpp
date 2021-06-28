@@ -23,8 +23,6 @@
 
 const char note[] =
     "NOTE:\n  If the database is created ignore this message\n\n";
-              //"but if the database is not created, use:\n"
-              //"  ./create <path_to_directory>\n\n";
 const char usage[] = "Usage:\n  ./dbcs [options] <source_path>\n\n";
 const char error_mes[] = "**********BAD SYNTAX**********\n"
                      "Look to --help or -h";
