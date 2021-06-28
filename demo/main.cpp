@@ -16,7 +16,8 @@ int main(int argc, const char *argv[])
       std::cout << note << usage << desc;
     else if (argc > 1){
       if (vm.count("log_lvl"))
-        Storage::init(Storage::choose_sev_lvl(vm["log_lvl"].as<std::string>()));
+        Storage::init(Storage::choose_sev_lvl(vm["log_lvl"]
+                                                  .as<std::string>()));
       else
         Storage::init(default_sev_lvl);
       BOOST_LOG_TRIVIAL(info) << "Start program\n";

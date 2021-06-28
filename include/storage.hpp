@@ -39,7 +39,8 @@ class Storage{
  public:
   explicit Storage(int& num_workers);
 
-  static void create_program_options(boost::program_options::options_description& desc,
+  static void create_program_options(
+      boost::program_options::options_description& desc,
                                      boost::program_options::variables_map& vm,
                                      const int& argc, const char *argv[]);
 

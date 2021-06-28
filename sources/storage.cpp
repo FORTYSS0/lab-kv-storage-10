@@ -67,7 +67,8 @@ void Storage::check_iterators(
         iterators_cf[i]->Next(), ++counter){
       BOOST_LOG_TRIVIAL(trace) << "Read:" << iterators_cf[i]->key().ToString()
                                << " : " << iterators_cf[i]->value().ToString()
-                               << " in " << handles_cf[i]->GetName() <<std::endl;
+                               << " in " << handles_cf[i]->GetName()
+                               <<std::endl;
       fields.emplace(iterators_cf[i]->value().ToString(),
                      iterators_cf[i]->key().ToString());
     }
@@ -75,17 +76,21 @@ void Storage::check_iterators(
     counter = 0;
   }
 }
-void Storage::create_program_options(boost::program_options::options_description& desc,
-                                     boost::program_options::variables_map& vm, const int& argc,
+void Storage::create_program_options(
+    boost::program_options::options_description& desc,
+    boost::program_options::variables_map& vm, const int& argc,
                                      const char** argv) {
   desc.add_options()
       ("help,h", "Help screen\n")
 
-      ("log_lvl,l", boost::program_options::value<std::string>(), "Logger severity\n")
+      ("log_lvl,l", boost::program_options::value<std::string>(),
+          "Logger severity\n")
 
-      ("thread_count,t", boost::program_options::value<int>(), "Count worker-thread\n")
+      ("thread_count,t", boost::program_options::value<int>(),
+          "Count worker-thread\n")
 
-      ("output,o", boost::program_options::value<std::string>(), "Path to output file");
+      ("output,o", boost::program_options::value<std::string>(),
+          "Path to output file");
   store(parse_command_line(argc, argv, desc), vm);
   notify(vm);
 }
@@ -161,7 +166,8 @@ void Storage::start(const std::string& path_to_db,
 
     std::vector<int> nums_in_columns;
     std::queue<Field> fields;
-    Storage::check_iterators(iterators_cf, handles_cf, fields, nums_in_columns);
+    Storage::check_iterators(iterators_cf, handles_cf, fields,
+                             nums_in_columns);
     BOOST_LOG_TRIVIAL(debug) << "DB checking data in iterators\n";
 
     Storage::delete_db(db, handles_cf, iterators_cf);
@@ -203,7 +209,8 @@ void Storage::start(const std::string& path_to_db,
 void Storage::init(const boost::log::trivial::severity_level& sev_lvl) {
   boost::log::add_common_attributes();
 
-  boost::log::core::get()->set_filter(boost::log::trivial::severity >= sev_lvl);
+  boost::log::core::get()->set_filter(boost::log::trivial::severity >=
+                                      sev_lvl);
 
   boost::log::add_console_log(std::clog,
                               boost::log::keywords::format =
@@ -214,7 +221,8 @@ void Storage::init(const boost::log::trivial::severity_level& sev_lvl) {
           boost::log::keywords::file_name = "sample_%N.log",
           boost::log::keywords::rotation_size = 30 * 1024 * 1024,
           boost::log::keywords::time_based_rotation =
-              boost::log::sinks::file::rotation_at_time_point(0, 0, 0),
+              boost::log::sinks::file::rotation_at_time_point(0, 0,
+                                                              0),
           boost::log::keywords::format = "[%Severity%][%TimeStamp%]: "
               "%Message%");
 }
