@@ -50,9 +50,6 @@ add_executable(demo
   ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
 )
 
-#add_executable(create
-#        ${CMAKE_CURRENT_SOURCE_DIR}/demo/create.cpp)
-
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third-party/PicoSHA2>"
@@ -68,7 +65,6 @@ target_link_libraries(${PROJECT_NAME} ${Boost_FILESYSTEM_LIBRARY})
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} RocksDB::rocksdb)
 target_link_libraries(demo ${PROJECT_NAME})
-#target_link_libraries(create ${PROJECT_NAME})
 
 if(BUILD_TESTS)
   add_executable(tests
